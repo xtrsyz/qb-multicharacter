@@ -138,7 +138,7 @@ end)
 
 QBCore.Functions.CreateCallback("qb-multicharacter:server:GetUserCharacters", function(source, cb)
     local src = source
-    local license = QBCore.Functions.GetIdentifier(src, 'license')
+    local license = QBCore.Functions.GetIdentifier(src, Config.PrimaryIdentifier)
 
     MySQL.query('SELECT * FROM players WHERE license = ?', {license}, function(result)
         cb(result)
@@ -153,7 +153,7 @@ end)
 
 QBCore.Functions.CreateCallback("qb-multicharacter:server:GetNumberOfCharacters", function(source, cb)
     local src = source
-    local license = QBCore.Functions.GetIdentifier(src, 'license')
+    local license = QBCore.Functions.GetIdentifier(src, Config.PrimaryIdentifier)
     local numOfChars = 0
 
     if next(Config.PlayersNumberOfCharacters) then
@@ -172,7 +172,7 @@ QBCore.Functions.CreateCallback("qb-multicharacter:server:GetNumberOfCharacters"
 end)
 
 QBCore.Functions.CreateCallback("qb-multicharacter:server:setupCharacters", function(source, cb)
-    local license = QBCore.Functions.GetIdentifier(source, 'license')
+    local license = QBCore.Functions.GetIdentifier(source, Config.PrimaryIdentifier)
     local plyChars = {}
     MySQL.query('SELECT * FROM players WHERE license = ?', {license}, function(result)
         for i = 1, (#result), 1 do
